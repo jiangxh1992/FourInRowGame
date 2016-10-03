@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context="com.example.albeeert.fourinrowgame.MainActivity">
+
+
+    <Button
+        android:text="START"
+        android:textSize="30dp"
+        android:layout_width="200sp"
+        android:layout_height="70sp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/startbutton"
+        android:background="#58E3B3"
+        android:textColor="?android:attr/textColorPrimaryInverse" />
+
+    <TextView
+        android:text="Name:Jiang Xinhou"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/startbutton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="127dp"
+        android:id="@+id/studentName"
+        android:textSize="25sp"
+        android:textColor="@android:color/background_light" />
+
+    <TextView
+        android:text="ID:3035347990"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/studentName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:textSize="25sp"
+        android:textColor="@android:color/background_light"
+        android:id="@+id/studentID" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/game_title"
+        android:id="@+id/imageView"
+        android:layout_marginTop="26dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp" />
+
+</RelativeLayout>
