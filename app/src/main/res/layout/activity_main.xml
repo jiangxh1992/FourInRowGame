@@ -18,7 +18,7 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/startbutton"
         android:background="#58E3B3"
-        android:textColor="?android:attr/textColorPrimaryInverse" />
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:text="Name:Jiang Xinhou"

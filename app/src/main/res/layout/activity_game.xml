@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/bg"
+    android:background="#000000"
     tools:context="com.example.albeeert.fourinrowgame.GameActivity">
 
         <!--Game Header-->
@@ -14,32 +14,14 @@
         android:id="@+id/game_header"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="#FFFFFF"
-        android:layout_weight="5">
+        android:background="@drawable/bg"
+        android:layout_weight="4">
 
-        <TextView
-            android:text="FirstPlayer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="10dp"
-            android:id="@+id/status_left" />
-        <TextView
-            android:text="SecondPlayer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"
-            android:id="@+id/status_right" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/ic_launcher"
+            android:background="@drawable/chess_p1"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -47,22 +29,63 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/ic_launcher"
+            android:background="@drawable/chess_p2"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:id="@+id/icon_right" />
 
+        <TextView
+            android:text="Player1"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/icon_left"
+            android:layout_marginLeft="5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/status_left"/>
+        <TextView
+            android:text="Player2"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/icon_right"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/status_right" />
+
+        <Button
+            android:text="Restart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#58E3B3"
+            android:textColor="#FFFFFF"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/button_restart" />
+
     </RelativeLayout>
 
 
     <!--棋盘界面-->
-        <AbsoluteLayout
-            android:id="@+id/layout_chessboard"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1">
+    <AbsoluteLayout
+        android:id="@+id/layout_chessboard"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#7b3d0d"
+        android:layout_weight="1">
 
-        </AbsoluteLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            app:srcCompat="@android:color/background_dark"
+            android:id="@+id/image_cave" />
+
+    </AbsoluteLayout>
 
 </LinearLayout>
