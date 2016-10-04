@@ -2,157 +2,157 @@
 <items version="2" >
 
     <item
-        is-multidex="false"
-        jar="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
-        <dex dex="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.1_08abf8747777926fc1732d7b4c625e21ba30b7f8.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
-        <dex dex="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-ui-24.2.1_a2cdd802e9560b8d3c46be1c2e484297de903f62.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/libs/internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
-        <dex dex="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.1_254eac42c9a9c9c0fd17f7c601417aecc9cfefa9.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.2.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-24.2.1_6e8fe98ad3834e3166361a88c27240b65a87f44d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
-        <dex dex="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-24.2.1_5b599e8e35f047c51d9dbdf33eea21197a6e7415.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/libs/internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="867dad63c33388ff8c7644b236579355036d075f">
-        <dex dex="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.1_5dd26bae2dce8ede4657d7d9b450dd1cf6aaed1c.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
-        <dex dex="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-24.2.1_2bf6c82f14ada99f292c5476de20e68fcee0d7ea.jar" />
-    </item>
-    <item
-        is-multidex="false"
+        is-multidex="true"
         jar="/Users/albeeert/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.1/support-annotations-24.2.1.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
         sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
-        <dex dex="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/pre-dexed/debug/support-annotations-24.2.1_50ad18609791816ee7e73b47084d3378a34dc5a3.jar" />
+        <dex dex="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-24.2.1_50ad18609791816ee7e73b47084d3378a34dc5a3/classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/jars/classes.jar"
+        is-multidex="true"
+        jar="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
-        <dex dex="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-24.2.1_62330bd0d30388cdf5a61f31ffae160e807c7309.jar" />
+        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
+        <dex dex="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_802f1af8aba3b6a88c9766aa34e0b7dccbf2176a/classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
-        <dex dex="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-utils-24.2.1_6488818d721315b90f6b178ec5e279c1f888f42e.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
-        <dex dex="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/pre-dexed/debug/com.android.support-support-media-compat-24.2.1_1bb125c7ffc63ee3d5bcc3b1ad22e579de9503c9.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
-        <dex dex="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.1_c90381a221bb09f430e97d96422a1022c46ecb26.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="4dc92bac8cbf85422fb629998df0ab3444b69ed0">
-        <dex dex="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/pre-dexed/debug/instant-run_0ab90260ed966692e5d2872b9103905dd066595a.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/24.2.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
-        <dex dex="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-24.2.1_a4c9a1bb55d974d6997f408f3609710dd919ac9a.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        is-multidex="true"
+        jar="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/libs/internal_impl-24.2.1.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
         sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
-        <dex dex="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.1_1f7f77d383368b63443176d121680d579f50a198.jar" />
+        <dex dex="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_1b38a501b78a7e35eb4335341dfbc0f29b4a32c8/classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        is-multidex="true"
+        jar="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="da507977fa4ea469b3a9050932c24635c84b1770">
-        <dex dex="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/pre-dexed/debug/instant-run-bootstrap_77eeb3e3e16fe35857d8d878a92ef1c531e9710e.jar" />
+        sha1="aeee9e72622a911b81b88823e3acd775d13357d1">
+        <dex dex="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_db27a7ec0f111abe23950e9095e794b8a1d6cf64/classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/classes.jar"
+        is-multidex="true"
+        jar="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
+        <dex dex="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-24.2.1_cf615a22f55034b7e58fa8bd302fa673c2830cbe/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
+        <dex dex="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-24.2.1_c8d3ff9693a74742eb2eeb8ae2526fc8491d56fc/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="50191af1e24cfce199667abbc5a48b0f99e103f4">
+        <dex dex="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_0cbc464cd033086a83cc2f0c00c5e3f790175ac8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-24.2.1_547661326e24dc43aea19c1949352c1f9a44bdc1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
+        <dex dex="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-24.2.1_03ec7d90d3c0d0ae8c8caef7193c4d488363d135/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="867dad63c33388ff8c7644b236579355036d075f">
+        <dex dex="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_86a988a1fe0a1de44c2c6f503f198a1ddff486a9/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
+        <dex dex="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_4be16eea3f2d087f8fbaa970d7fe788c2875d69d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_befe461c4ab9295b3a7b6fed58a3f70dd320154b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
+        <dex dex="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-24.2.1_353435cd14ac4c36c9ec6212dbf11aafab6d2495/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
+        <dex dex="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-24.2.1_8c1c35ea1847518039fe81041736153965b37ae3/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
+        <dex dex="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-24.2.1_0242d12a5159caa7c8977f6072153ffd39a6b942/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-24.2.1_c9d4167d4f64eca269edd6189dee959c04080604/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
         sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
-        <dex dex="/Users/albeeert/Documents/workspace/FourInRowGame/app/build/intermediates/pre-dexed/debug/com.android.support-support-fragment-24.2.1_4658c07b00f9d474f2172b9baf93106b4e2c7003.jar" />
+        <dex dex="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-24.2.1_6b0723e5fb4a05fb3e482e22cbcb7200418dc661/classes.dex" />
     </item>
 
 </items>
