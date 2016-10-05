@@ -18,11 +18,19 @@ class CheckNode{
     int MDiagonal;  // 主对角线...
     int ADiagonal;  // 辅对角线...
 
+    // 构造
     CheckNode(){
-        Horizontal = 0;
-        Vertical = 0;
-        MDiagonal = 0;
-        ADiagonal = 0;
+        Horizontal = 1;
+        Vertical = 1;
+        MDiagonal = 1;
+        ADiagonal = 1;
+    }
+    // 重置
+    void Reset(){
+        Horizontal = 1;
+        Vertical = 1;
+        MDiagonal = 1;
+        ADiagonal = 1;
     }
 }
 
@@ -51,37 +59,37 @@ public class GameActivity extends AppCompatActivity {
     private AbsoluteLayout CBLayout = null;
 
     // 玩家1和玩家2的棋局状态
-    CheckNode[] checkNode = null;
+    private CheckNode[] checkNode = null;
 
     // 当前游戏状态(0:平局 1:玩家1下棋 2:玩家2下棋 11:玩家1胜利 22:玩家2胜利)
-    int gameResult = 0;
+    private int gameResult = 0;
 
     // 棋盘状态(0:空 1:玩家1的棋子 2:玩家2的棋子)
-    int[][] ChessBord = null;
+    private int[][] ChessBord = null;
 
     // 落子计数器
-    int pieceCount = 0;
+    private int pieceCount = 0;
 
+    /**
+     * 游戏界面初始化入口
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         // 基础页面
         setContentView(R.layout.activity_game);
+        // 全局初始化
+        ActivityInit();
         // 游戏初始化
         GameInit();
-        // 绘制棋盘
-        DrawChessBoard();
-
-        // 游戏开始
-        GameStart();
 
     }
 
     /**
-     * 游戏初始化
+     * 全局初始化(只初始化一次)
      */
-    public void GameInit(){
-
+    public void ActivityInit(){
         // 棋盘宽高
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -91,12 +99,6 @@ public class GameActivity extends AppCompatActivity {
 
         // UI 初始化
         ReStartButton = (Button)findViewById(R.id.button_restart);
-        ReStartButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RestartGame();
-            }
-        });
         StatusLeft = (TextView)findViewById(R.id.status_left);
         StatusRight = (TextView)findViewById(R.id.status_right);
         IconLeft = (ImageView)findViewById(R.id.icon_left);
@@ -104,18 +106,74 @@ public class GameActivity extends AppCompatActivity {
         ImageCave = (ImageView)findViewById(R.id.image_cave);
         CBLayout = (AbsoluteLayout) findViewById(R.id.layout_chessboard);
 
-        // 变量初始化
+        // 检测状态初始化
         checkNode = new CheckNode[2];
         checkNode[0] = new CheckNode();
         checkNode[1] = new CheckNode();
 
-        gameResult = 1;// 默认玩家1先手
+        // 监听重新开始游戏
+        ReStartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RestartGame();
+            }
+        });
+    }
+
+    /**
+     * 游戏初始化(每次重新游戏都要初始化)
+     */
+    public void GameInit(){
+
+        // 开始游戏监听
+        CBLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // 选用抬起的事件
+                if (event.getAction() == MotionEvent.ACTION_DOWN){
+                    // 横坐标
+                    float touchX = event.getX();
+                    // 列数
+                    int column = (int)(touchX/CellWidth);
+                    // 计算并落子
+                    SetPiece(CalCoord(column));
+                }
+                return false;
+            }
+        });
+
+        // 默认玩家1先手
+        gameResult = 1;
         UpdateUI(1);
 
-        ChessBord = new int[H_NUM][V_NUM];//棋盘二维数组,默认初始化元素为0
+        // 棋盘二维数组,默认初始化元素为0
+        ChessBord = new int[H_NUM][V_NUM];
 
         // 落子计数器
         pieceCount = 0;
+
+        // 绘制棋盘
+        DrawChessBoard();
+    }
+
+    /**
+     * 游戏结束
+     */
+    public void GameOver(){
+        CBLayout.setOnTouchListener(null);
+        // 释放棋盘数据
+        ChessBord = null;
+    }
+
+    /**
+     * 重新开始游戏
+     */
+    public void RestartGame(){
+        // 移除棋盘棋子界面
+        CBLayout.removeAllViews();
+        // 重新初始化游戏
+        GameInit();
+
     }
 
     /**
@@ -154,29 +212,6 @@ public class GameActivity extends AppCompatActivity {
     }
 
     /**
-     * 游戏开始
-     */
-    public void GameStart(){
-
-        // 注册棋盘的触摸监听
-        CBLayout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // 选用抬起的事件
-                if (event.getAction() == MotionEvent.ACTION_DOWN){
-                    // 横坐标
-                    float touchX = event.getX();
-                    // 列数
-                    int column = (int)(touchX/CellWidth);
-                    // 计算并落子
-                    SetPiece(CalCoord(column));
-                }
-                return false;
-            }
-        });
-    }
-
-    /**
      * 计算落子坐标
      */
     public Point CalCoord(int column){
@@ -199,12 +234,14 @@ public class GameActivity extends AppCompatActivity {
         // 该列棋子已落满或者程序出错
         if (point == null)
             return;
+
         // 计数器+1
         ++pieceCount;
         // 界面落子
         DrawPiece(point);
         // 游戏状态更新
         ChessBord[point.x][point.y] = gameResult;
+
         // 检查输赢情况
         // 是否已平局
         if (pieceCount == V_NUM*H_NUM){
@@ -212,9 +249,15 @@ public class GameActivity extends AppCompatActivity {
             UpdateUI(0);
             // 游戏结束
             GameOver();
+            // 终止
+            return;
         }
         // 是否有人赢
         int result = CheckResult(point);
+        // 重置检测状态
+        checkNode[0].Reset();
+        checkNode[1].Reset();
+
         if (result == 0){
             // 换人继续
             if (gameResult == 1){
@@ -225,12 +268,13 @@ public class GameActivity extends AppCompatActivity {
                 UpdateUI(gameResult);
             }
         }else {
-           // if (gameResult == 1)
-               // UpdateUI(11);
-           // else
-               // UpdateUI(22);
-            // 游戏结束
-           // GameOver();
+
+            if (gameResult == 1)
+                UpdateUI(11);
+            else
+                UpdateUI(22);
+             // 游戏结束
+            GameOver();
         }
 
     }
@@ -259,19 +303,6 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * 游戏结束
-     */
-    public void GameOver(){
-        CBLayout.setOnTouchListener(null);
-    }
-
-    /**
-     * 重新开始游戏
-     */
-    public void RestartGame(){
-        CBLayout.removeAllViews();
-    }
 
     /**
      * 绘制指定棋子
