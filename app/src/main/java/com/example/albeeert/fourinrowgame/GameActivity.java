@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AbsoluteLayout;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 // 记录双方棋局状态
@@ -39,15 +40,17 @@ public class GameActivity extends AppCompatActivity {
     // 棋盘横竖棋子个数
     public static final int H_NUM = 7;
     public static final int V_NUM = 6;
-    // 上部间隙
-    public static final int TOP_GAP = 250;
+    // 左部间隙
+    private int LEFT_GAP = 10; // 至少10
+    // header和footer的高度和
+    public static final int FHHeight = 350;
 
     // 棋盘宽度(屏幕宽度)
     private float CBWidth = 0;
     // 棋盘高度
-    private float CBHeight = 0;
+    private int CBHeight = 0;
     // 棋盘单位宽度
-    private float CellWidth = 0;
+    private int CellWidth = 0;
 
     // 获取xml的UI组件引用
     private Button ReStartButton = null;
@@ -55,8 +58,9 @@ public class GameActivity extends AppCompatActivity {
     private TextView StatusRight = null;
     private ImageView IconLeft = null;
     private ImageView IocnRight = null;
-    private ImageView ImageCave = null;
+    private RelativeLayout HeaderLayout = null;
     private AbsoluteLayout CBLayout = null;
+    private RelativeLayout FooterLayout = null;
 
     // 玩家1和玩家2的棋局状态
     private CheckNode[] checkNode = null;
@@ -90,12 +94,6 @@ public class GameActivity extends AppCompatActivity {
      * 全局初始化(只初始化一次)
      */
     public void ActivityInit(){
-        // 棋盘宽高
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-        CBWidth = dm.widthPixels;
-        CBHeight = CBWidth/H_NUM*V_NUM;
-        CellWidth = CBWidth/H_NUM;
 
         // UI 初始化
         ReStartButton = (Button)findViewById(R.id.button_restart);
@@ -103,8 +101,22 @@ public class GameActivity extends AppCompatActivity {
         StatusRight = (TextView)findViewById(R.id.status_right);
         IconLeft = (ImageView)findViewById(R.id.icon_left);
         IocnRight = (ImageView)findViewById(R.id.icon_right);
-        ImageCave = (ImageView)findViewById(R.id.image_cave);
+        HeaderLayout = (RelativeLayout)findViewById(R.id.game_header);
         CBLayout = (AbsoluteLayout) findViewById(R.id.layout_chessboard);
+        FooterLayout = (RelativeLayout)findViewById(R.id.game_footer);
+
+        // 棋盘宽高
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int ScreenW = dm.widthPixels;
+        int ScreenH = dm.heightPixels;
+
+        int offset = ScreenH - ScreenW - FHHeight; //350是header和footer的高度和
+        if (offset < -2*LEFT_GAP)
+            LEFT_GAP = -(offset/2);
+        CBWidth = ScreenW - 2*LEFT_GAP;
+        CBHeight = (int)(CBWidth/H_NUM*V_NUM);
+        CellWidth = (int)(CBWidth/H_NUM);
 
         // 检测状态初始化
         checkNode = new CheckNode[2];
@@ -202,8 +214,8 @@ public class GameActivity extends AppCompatActivity {
                 view.setMinimumWidth((int)(CellWidth));
                 view.setMinimumWidth((int)(CellWidth));
 
-                view.setX(CellWidth*j);
-                view.setY(CellWidth*i+TOP_GAP);
+                view.setX(CellWidth*j+LEFT_GAP);
+                view.setY(CellWidth*i);
 
                 CBLayout.addView(view);
             }
@@ -320,8 +332,8 @@ public class GameActivity extends AppCompatActivity {
         piece.setMinimumWidth((int)(CellWidth));
         piece.setMinimumWidth((int)(CellWidth));
 
-        piece.setX(CellWidth*point.x);
-        piece.setY(CellWidth*(V_NUM-point.y-1)+TOP_GAP);
+        piece.setX(CellWidth*point.x + LEFT_GAP);
+        piece.setY(CellWidth*(V_NUM-point.y-1));
 
         CBLayout.addView(piece);
     }

@@ -13,9 +13,9 @@
     <RelativeLayout
         android:id="@+id/game_header"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@drawable/bg"
-        android:layout_weight="4">
+        android:layout_height="200px"
+        android:background="@drawable/game_header"
+        android:layout_weight="0">
 
 
         <ImageView
@@ -76,16 +76,21 @@
         android:id="@+id/layout_chessboard"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="#7b3d0d"
+        android:background="@drawable/game_body"
         android:layout_weight="1">
 
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            app:srcCompat="@android:color/background_dark"
-            android:id="@+id/image_cave" />
-
     </AbsoluteLayout>
+
+
+    <!--GAME FOOTER-->
+    <RelativeLayout
+        android:id="@+id/game_footer"
+        android:layout_width="fill_parent"
+        android:layout_height="150px"
+        android:layout_weight="0"
+        android:background="@drawable/game_footer">
+
+    </RelativeLayout>
 
 </LinearLayout>
