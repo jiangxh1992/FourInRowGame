@@ -13,7 +13,7 @@
     <RelativeLayout
         android:id="@+id/game_header"
         android:layout_width="fill_parent"
-        android:layout_height="200px"
+        android:layout_height="300px"
         android:background="@drawable/game_header"
         android:layout_weight="0">
 
@@ -87,7 +87,7 @@
     <RelativeLayout
         android:id="@+id/game_footer"
         android:layout_width="fill_parent"
-        android:layout_height="150px"
+        android:layout_height="200px"
         android:layout_weight="0"
         android:background="@drawable/game_footer">
 
