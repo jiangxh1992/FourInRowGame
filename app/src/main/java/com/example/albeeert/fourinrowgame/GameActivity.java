@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AbsoluteLayout;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -193,26 +194,13 @@ public class GameActivity extends AppCompatActivity {
      */
     public void DrawChessBoard(){
 
-        // 棋子
-        ImageView left = new ImageView(this);
-        left.setImageResource(R.drawable.chess_p1);
-        left.setMaxWidth((int)(CellWidth));
-        left.setMaxWidth((int)(CellWidth));
-        left.setMinimumWidth((int)(CellWidth));
-        left.setMinimumWidth((int)(CellWidth));
-        left.setY(5);
-        left.setX(0);
-        //CBLayout.addView(left);
-
         // 绘制棋子洞
         for(int i = 0 ; i<V_NUM ; i++){
             for (int j = 0 ; j<H_NUM ; j++){
                 ImageView view = new ImageView(this);
                 view.setImageResource(R.drawable.chess_bg);
+                view.setMaxHeight((int)(CellWidth));
                 view.setMaxWidth((int)(CellWidth));
-                view.setMaxWidth((int)(CellWidth));
-                view.setMinimumWidth((int)(CellWidth));
-                view.setMinimumWidth((int)(CellWidth));
 
                 view.setX(CellWidth*j+LEFT_GAP);
                 view.setY(CellWidth*i);
@@ -327,10 +315,8 @@ public class GameActivity extends AppCompatActivity {
             piece.setImageResource(R.drawable.chess_p2);
         }
 
+        piece.setMaxHeight((int)(CellWidth));
         piece.setMaxWidth((int)(CellWidth));
-        piece.setMaxWidth((int)(CellWidth));
-        piece.setMinimumWidth((int)(CellWidth));
-        piece.setMinimumWidth((int)(CellWidth));
 
         piece.setX(CellWidth*point.x + LEFT_GAP);
         piece.setY(CellWidth*(V_NUM-point.y-1));

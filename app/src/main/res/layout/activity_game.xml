@@ -13,60 +13,71 @@
     <RelativeLayout
         android:id="@+id/game_header"
         android:layout_width="fill_parent"
-        android:layout_height="300px"
+        android:layout_height="350px"
         android:background="@drawable/game_header"
         android:layout_weight="0">
 
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/chess_p1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/role1"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:id="@+id/icon_left" />
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/chess_p2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/role2"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:id="@+id/icon_right" />
 
         <TextView
-            android:text="Player1"
-            android:textColor="#FFFFFF"
+            android:text=""
+            android:textColor="#ff1403"
             android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/icon_left"
-            android:layout_marginLeft="5dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="5dp"
-            android:id="@+id/status_left"/>
+            android:id="@+id/status_left"
+            android:layout_above="@+id/icon_left"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
         <TextView
-            android:text="Player2"
-            android:textColor="#FFFFFF"
+            android:text=""
+            android:textColor="#ff1003"
             android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/icon_right"
-            android:layout_marginRight="5dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="5dp"
-            android:id="@+id/status_right" />
+            android:id="@+id/status_right"
+            android:layout_above="@id/icon_right"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <Button
+            android:text="withdraw"
+            android:layout_width="80sp"
+            android:layout_height="30sp"
+            android:background="#ffb003"
+            android:textColor="#FFFFFF"
+            android:id="@+id/button_withdraw"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <Button
             android:text="Restart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#58E3B3"
+            android:layout_width="80sp"
+            android:layout_height="30sp"
+            android:background="#ffb003"
             android:textColor="#FFFFFF"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/button_restart" />
+            android:id="@+id/button_restart"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
 
