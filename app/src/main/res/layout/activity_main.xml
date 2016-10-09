@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
@@ -10,15 +10,37 @@
 
 
     <Button
-        android:text="START"
-        android:textSize="10dp"
-        android:layout_width="70sp"
-        android:layout_height="30sp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:id="@+id/startbutton"
         android:textColor="#FFFFFF"
-        android:background="#ffb003"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="25dp" />
+        android:background="@drawable/start_button"
+        android:layout_marginBottom="0dp"
+        android:layout_x="135dp"
+        android:layout_y="386dp" />
 
-</RelativeLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/cloud1"
+        android:layout_x="141dp"
+        android:layout_y="-83dp"
+        android:id="@+id/cloud1" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/cloud3"
+        android:layout_x="-71dp"
+        android:layout_y="-13dp"
+        android:id="@+id/cloud3" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/cloud2"
+        android:layout_x="82dp"
+        android:layout_y="20dp"
+        android:id="@+id/cloud2" />
+
+</AbsoluteLayout>
