@@ -6,14 +6,15 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsoluteLayout;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-// 记录双方棋局状态
+import java.util.ArrayList;
+
+/*** 1.记录双方棋局状态数据结构 ***/
 class CheckNode{
     int Horizontal; // 水平方向上相同棋子的个数
     int Vertical;   // 竖直方向...
@@ -36,13 +37,30 @@ class CheckNode{
     }
 }
 
+/*** 2.棋子节点数据结构 ***/
+class Piece{
+    int value;        // 0:空 1:玩家1的棋子 2:玩家2的棋子
+    ImageView image;  // 棋子图片
+
+    // 构造
+    Piece(){
+        value = 0;
+        image = null;
+    }
+    // 重置
+    void Reset(){
+        value = 0;
+        image.setImageResource(R.drawable.empty);
+    }
+}
+
 public class GameActivity extends AppCompatActivity {
 
     // 棋盘横竖棋子个数
     public static final int H_NUM = 7;
     public static final int V_NUM = 6;
     // 左部间隙
-    private int LEFT_GAP = 10; // 至少10
+    private int LEFT_GAP = 30; // 至少30
     // header和footer的高度和
     public static final int FHHeight = 350;
 
@@ -69,8 +87,10 @@ public class GameActivity extends AppCompatActivity {
     // 当前游戏状态(0:平局 1:玩家1下棋 2:玩家2下棋 11:玩家1胜利 22:玩家2胜利)
     private int gameResult = 0;
 
-    // 棋盘状态(0:空 1:玩家1的棋子 2:玩家2的棋子)
-    private int[][] ChessBord = null;
+    // 棋盘
+    private Piece[][] ChessBord = null;
+    // 用一个可变数组实现堆栈依次保存所下棋子的顺序
+    ArrayList<Point>PieceStack = null;
 
     // 落子计数器
     private int pieceCount = 0;
@@ -119,10 +139,21 @@ public class GameActivity extends AppCompatActivity {
         CBHeight = (int)(CBWidth/H_NUM*V_NUM);
         CellWidth = (int)(CBWidth/H_NUM);
 
+        // 棋盘二维数组
+        ChessBord = new Piece[H_NUM][V_NUM];
+        for (int h=0; h<H_NUM; h++){
+            for (int v=0; v<V_NUM; v++){
+                ChessBord[h][v] = new Piece();
+            }
+        }
+
         // 检测状态初始化
         checkNode = new CheckNode[2];
         checkNode[0] = new CheckNode();
         checkNode[1] = new CheckNode();
+
+        // 绘制棋盘
+        DrawChessBoard();
 
         // 监听重新开始游戏
         ReStartButton.setOnClickListener(new View.OnClickListener() {
@@ -159,31 +190,30 @@ public class GameActivity extends AppCompatActivity {
         gameResult = 1;
         UpdateUI(1);
 
-        // 棋盘二维数组,默认初始化元素为0
-        ChessBord = new int[H_NUM][V_NUM];
-
         // 落子计数器
         pieceCount = 0;
 
-        // 绘制棋盘
-        DrawChessBoard();
     }
 
     /**
      * 游戏结束
      */
     public void GameOver(){
+        // 停止游戏棋盘交互
         CBLayout.setOnTouchListener(null);
-        // 释放棋盘数据
-        ChessBord = null;
     }
 
     /**
      * 重新开始游戏
      */
     public void RestartGame(){
-        // 移除棋盘棋子界面
-        CBLayout.removeAllViews();
+
+        // 重置棋盘
+        for (int h=0; h<H_NUM; h++){
+            for (int v=0; v<V_NUM; v++){
+                ChessBord[h][v].Reset();
+            }
+        }
         // 重新初始化游戏
         GameInit();
 
@@ -194,18 +224,32 @@ public class GameActivity extends AppCompatActivity {
      */
     public void DrawChessBoard(){
 
-        // 绘制棋子洞
+        // 绘制棋子洞和空棋子
         for(int i = 0 ; i<V_NUM ; i++){
             for (int j = 0 ; j<H_NUM ; j++){
+
+                // 土壤
                 ImageView view = new ImageView(this);
                 view.setImageResource(R.drawable.chess_bg);
-                view.setMaxHeight((int)(CellWidth));
-                view.setMaxWidth((int)(CellWidth));
-
+                view.setMaxHeight(CellWidth);
+                view.setMaxWidth(CellWidth);
                 view.setX(CellWidth*j+LEFT_GAP);
                 view.setY(CellWidth*i);
-
+                // 绘制到棋盘中
                 CBLayout.addView(view);
+
+                // 空棋子
+                ImageView piece = new ImageView(this);
+                piece.setImageResource(R.drawable.empty);
+                piece.setMaxHeight(CellWidth);
+                piece.setMaxWidth(CellWidth);
+                piece.setX(CellWidth*j + LEFT_GAP);
+                piece.setY(CellWidth*(V_NUM-i-1));
+                // 棋子图片引用添加到棋盘数据
+                ChessBord[j][i].image = piece;
+                // 绘制棋子到棋盘
+                CBLayout.addView(piece);
+
             }
         }
 
@@ -217,7 +261,7 @@ public class GameActivity extends AppCompatActivity {
     public Point CalCoord(int column){
         // 计算落子坐标
         for (int i = 0 ; i<V_NUM ; i++){
-            if (ChessBord[column][i] == 0){
+            if (ChessBord[column][i].value == 0){
                 Point point = new Point(column,i);
                 return point;
             } else {
@@ -240,7 +284,7 @@ public class GameActivity extends AppCompatActivity {
         // 界面落子
         DrawPiece(point);
         // 游戏状态更新
-        ChessBord[point.x][point.y] = gameResult;
+        ChessBord[point.x][point.y].value = gameResult;
 
         // 检查输赢情况
         // 是否已平局
@@ -308,20 +352,14 @@ public class GameActivity extends AppCompatActivity {
      * 绘制指定棋子
      */
     public void DrawPiece(Point point){
-        ImageView piece = new ImageView(this);
+
+        ImageView piece = ChessBord[point.x][point.y].image;
         if (gameResult == 1){
             piece.setImageResource(R.drawable.chess_p1);
         }else {
             piece.setImageResource(R.drawable.chess_p2);
         }
 
-        piece.setMaxHeight((int)(CellWidth));
-        piece.setMaxWidth((int)(CellWidth));
-
-        piece.setX(CellWidth*point.x + LEFT_GAP);
-        piece.setY(CellWidth*(V_NUM-point.y-1));
-
-        CBLayout.addView(piece);
     }
 
     /**
@@ -336,50 +374,50 @@ public class GameActivity extends AppCompatActivity {
             stopCount = 0;
             ++counter;
             // 上
-            if ((stopDir[0]==1) || (point.y + counter >= V_NUM) || ChessBord[point.x][point.y + counter] != gameResult) {
+            if ((stopDir[0]==1) || (point.y + counter >= V_NUM) || ChessBord[point.x][point.y + counter].value != gameResult) {
                 stopDir[0]=1;//向上超出棋盘或遇到非同色棋子终止
             } else {
                 checkNode[gameResult - 1].Vertical++;//纵向+1
             }
             // 下
-            if ((stopDir[1]==1) || (point.y - counter < 0) || ChessBord[point.x][point.y - counter] != gameResult) {
+            if ((stopDir[1]==1) || (point.y - counter < 0) || ChessBord[point.x][point.y - counter].value != gameResult) {
                 stopDir[1]=1;
             } else {
                 checkNode[gameResult - 1].Vertical++;
             }
             // 左
-            if ((stopDir[2]==1) || (point.x - counter < 0) || ChessBord[point.x - counter][point.y] != gameResult) {
+            if ((stopDir[2]==1) || (point.x - counter < 0) || ChessBord[point.x - counter][point.y].value != gameResult) {
                 stopDir[2]=1;
             } else {
                 checkNode[gameResult - 1].Horizontal++;
             }
             // 右
-            if ((stopDir[3]==1) || (point.x + counter >= H_NUM) || ChessBord[point.x + counter][point.y] != gameResult) {
+            if ((stopDir[3]==1) || (point.x + counter >= H_NUM) || ChessBord[point.x + counter][point.y].value != gameResult) {
                 stopDir[3]=1;
             } else {
                 checkNode[gameResult - 1].Horizontal++;
             }
 
             // 左上
-            if ((stopDir[4]==1) || (point.x - counter < 0) || (point.y + counter >= V_NUM) || (ChessBord[point.x - counter][point.y + counter] != gameResult)) {
+            if ((stopDir[4]==1) || (point.x - counter < 0) || (point.y + counter >= V_NUM) || (ChessBord[point.x - counter][point.y + counter].value != gameResult)) {
                 stopDir[4]=1;
             } else {
                 checkNode[gameResult - 1].ADiagonal++;
             }
             // 右下
-            if ((stopDir[5]==1) || (point.x + counter >= H_NUM) || (point.y - counter < 0) || (ChessBord[point.x + counter][point.y - counter] != gameResult)) {
+            if ((stopDir[5]==1) || (point.x + counter >= H_NUM) || (point.y - counter < 0) || (ChessBord[point.x + counter][point.y - counter].value != gameResult)) {
                 stopDir[5]=1;
             } else {
                 checkNode[gameResult - 1].ADiagonal++;
             }
             // 右上
-            if ((stopDir[6]==1) || (point.x + counter >= H_NUM) || (point.y + counter >= V_NUM) || (ChessBord[point.x + counter][point.y + counter] != gameResult)) {
+            if ((stopDir[6]==1) || (point.x + counter >= H_NUM) || (point.y + counter >= V_NUM) || (ChessBord[point.x + counter][point.y + counter].value != gameResult)) {
                 stopDir[6]=1;
             } else {
                 checkNode[gameResult - 1].MDiagonal++;
             }
             // 左下
-            if ((stopDir[7]==1) || (point.x - counter < 0) || (point.y - counter < 0) || (ChessBord[point.x - counter][point.y - counter] != gameResult)) {
+            if ((stopDir[7]==1) || (point.x - counter < 0) || (point.y - counter < 0) || (ChessBord[point.x - counter][point.y - counter].value != gameResult)) {
                 stopDir[7]=1;
             } else {
                 checkNode[gameResult - 1].MDiagonal++;
