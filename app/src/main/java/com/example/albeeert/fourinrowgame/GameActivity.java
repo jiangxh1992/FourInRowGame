@@ -54,6 +54,7 @@ class Piece{
     }
 }
 
+/*** 游戏界面 ***/
 public class GameActivity extends AppCompatActivity {
 
     // 棋盘横竖棋子个数
@@ -73,6 +74,7 @@ public class GameActivity extends AppCompatActivity {
 
     // 获取xml的UI组件引用
     private Button ReStartButton = null;
+    private Button WithDrawButton = null;
     private TextView StatusLeft = null;
     private TextView StatusRight = null;
     private ImageView IconLeft = null;
@@ -118,6 +120,7 @@ public class GameActivity extends AppCompatActivity {
 
         // UI 初始化
         ReStartButton = (Button)findViewById(R.id.button_restart);
+        WithDrawButton = (Button)findViewById(R.id.button_withdraw);
         StatusLeft = (TextView)findViewById(R.id.status_left);
         StatusRight = (TextView)findViewById(R.id.status_right);
         IconLeft = (ImageView)findViewById(R.id.icon_left);
@@ -162,6 +165,15 @@ public class GameActivity extends AppCompatActivity {
                 RestartGame();
             }
         });
+        // 开启悔棋监听
+        WithDrawButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 悔棋一步
+                WithDraw();
+            }
+        });
+
     }
 
     /**
@@ -193,6 +205,9 @@ public class GameActivity extends AppCompatActivity {
         // 落子计数器
         pieceCount = 0;
 
+        // 初始化栈
+        PieceStack = new ArrayList<Point>();
+
     }
 
     /**
@@ -201,6 +216,8 @@ public class GameActivity extends AppCompatActivity {
     public void GameOver(){
         // 停止游戏棋盘交互
         CBLayout.setOnTouchListener(null);
+        // 清空栈
+        PieceStack = null;
     }
 
     /**
@@ -279,6 +296,8 @@ public class GameActivity extends AppCompatActivity {
         if (point == null)
             return;
 
+        // 入栈
+        PieceStack.add(point);
         // 计数器+1
         ++pieceCount;
         // 界面落子
@@ -437,5 +456,30 @@ public class GameActivity extends AppCompatActivity {
         }
 
     }
+
+    /**
+     * 悔棋一步
+     */
+    public void WithDraw(){
+
+        // 异常检测
+        if (PieceStack == null || PieceStack.size() == 0)
+            return;
+        // 取出最后一个坐标并出站
+        Point point = PieceStack.remove(PieceStack.size()-1);
+        // 棋盘移除最后一步棋
+        ChessBord[point.x][point.y].Reset();
+        // 换人
+        if (gameResult == 1){
+            gameResult = 2;
+            UpdateUI(gameResult);
+        }else {
+            gameResult = 1;
+            UpdateUI(gameResult);
+        }
+        // 计数-1
+        --pieceCount;
+    }
+
 
 }
