@@ -34,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
     private float ScreenW = 0;
     private float ScreenH = 0;
 
+    // 动画线程
+    private MyThread animationThread = null;
+    // 当前页面是否活跃
+    private boolean isActive = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,8 +72,22 @@ public class MainActivity extends AppCompatActivity {
         );
 
         // 开始按钮浮动动画
-        new Thread(new MyThread()).start();
+        animationThread = new MyThread();
+        new Thread(animationThread).start();
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isActive = false;
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        isActive = true;
+        // 开始按钮浮动动画
+        new Thread(animationThread).start();
     }
 
     /**
@@ -77,8 +96,9 @@ public class MainActivity extends AppCompatActivity {
     class MyThread implements Runnable {
         @Override
         public void run() {
+
             // update
-            while (true) {
+            while (isActive) {
                 try {
                     // 1.开始按钮浮动
                     sinAngle += 0.3f;

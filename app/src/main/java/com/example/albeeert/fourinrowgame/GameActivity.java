@@ -189,7 +189,7 @@ public class GameActivity extends AppCompatActivity {
                 if (event.getAction() == MotionEvent.ACTION_DOWN){
                     // 横坐标
 
-                    float touchX = LEFT_GAP + event.getX();
+                    float touchX = event.getX();
                     // 列数
                     int column = (int)(touchX/CellWidth);
                     // 计算并落子
