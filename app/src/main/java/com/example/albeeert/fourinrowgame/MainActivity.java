@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     // 开始游戏按钮
     private Button startGameBtn = null;
     // 按钮浮动幅度
-    private final float range = 20.0f;
+    private final float range = 10.0f;
     // 计时间隔
     private final int Interval = 100;
     // sin角度
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             while (true) {
                 try {
                     // 1.开始按钮浮动
-                    sinAngle += 0.5f;
+                    sinAngle += 0.3f;
                     Thread.sleep(Interval);
                     startGameBtn.setY(initY + (float)(range*Math.sin(sinAngle)));
 

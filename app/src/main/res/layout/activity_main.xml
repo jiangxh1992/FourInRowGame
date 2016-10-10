@@ -9,16 +9,6 @@
     tools:context="com.example.albeeert.fourinrowgame.MainActivity">
 
 
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/startbutton"
-        android:textColor="#FFFFFF"
-        android:background="@drawable/start_button"
-        android:layout_marginBottom="0dp"
-        android:layout_x="135dp"
-        android:layout_y="386dp" />
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,20 +17,30 @@
         android:layout_y="-83dp"
         android:id="@+id/cloud1" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/cloud3"
-        android:layout_x="-71dp"
-        android:layout_y="-13dp"
-        android:id="@+id/cloud3" />
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/startbutton"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/start_button"
+        android:layout_marginBottom="0dp"
+        android:layout_x="114dp"
+        android:layout_y="350dp" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/cloud2"
-        android:layout_x="82dp"
-        android:layout_y="20dp"
+        android:layout_x="70dp"
+        android:layout_y="-12dp"
         android:id="@+id/cloud2" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/cloud3"
+        android:layout_x="-70dp"
+        android:layout_y="-19dp"
+        android:id="@+id/cloud3" />
 
 </AbsoluteLayout>

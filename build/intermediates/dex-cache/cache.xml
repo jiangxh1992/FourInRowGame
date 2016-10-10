@@ -34,7 +34,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="fcd926ec98a76636c0b9dc179101dcf0bc4ec25f">
+        sha1="b9b65894fe1f7a0f3935f76eb6bbd6da82968b5b">
         <dex dex="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_db27a7ec0f111abe23950e9095e794b8a1d6cf64/classes.dex" />
     </item>
     <item
@@ -61,7 +61,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="b3c357707247edf741d9d5720c4f2ed26a7c39f4">
+        sha1="3f4524da524de2b1d748c9936808c0d3e652fdf3">
         <dex dex="/Users/albeeert/Desktop/Git/FourInRowGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_0cbc464cd033086a83cc2f0c00c5e3f790175ac8/classes.dex" />
     </item>
     <item

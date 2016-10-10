@@ -61,7 +61,7 @@ public class GameActivity extends AppCompatActivity {
     public static final int H_NUM = 7;
     public static final int V_NUM = 6;
     // 左部间隙
-    private int LEFT_GAP = 30; // 至少30
+    private int LEFT_GAP = 5; // 至少10
     // header和footer的高度和
     public static final int FHHeight = 350;
 
@@ -185,10 +185,11 @@ public class GameActivity extends AppCompatActivity {
         CBLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                // 选用抬起的事件
+                // 选用点击事件
                 if (event.getAction() == MotionEvent.ACTION_DOWN){
                     // 横坐标
-                    float touchX = event.getX();
+
+                    float touchX = LEFT_GAP + event.getX();
                     // 列数
                     int column = (int)(touchX/CellWidth);
                     // 计算并落子
@@ -276,6 +277,10 @@ public class GameActivity extends AppCompatActivity {
      * 计算落子坐标
      */
     public Point CalCoord(int column){
+
+        // 如果超出棋盘右边界视为最右边的一列
+        if (column >= H_NUM)
+            column = H_NUM-1;
         // 计算落子坐标
         for (int i = 0 ; i<V_NUM ; i++){
             if (ChessBord[column][i].value == 0){

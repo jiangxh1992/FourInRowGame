@@ -13,22 +13,22 @@
     <RelativeLayout
         android:id="@+id/game_header"
         android:layout_width="fill_parent"
-        android:layout_height="350px"
+        android:layout_height="200px"
         android:background="@drawable/game_header"
         android:layout_weight="0">
 
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:background="@drawable/role1"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:id="@+id/icon_left" />
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:background="@drawable/role2"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
@@ -98,7 +98,7 @@
     <RelativeLayout
         android:id="@+id/game_footer"
         android:layout_width="fill_parent"
-        android:layout_height="200px"
+        android:layout_height="100px"
         android:layout_weight="0"
         android:background="@drawable/game_footer">
 
