@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.AbsoluteLayout;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -61,14 +60,10 @@ public class GameActivity extends AppCompatActivity {
     public static final int H_NUM = 7;
     public static final int V_NUM = 6;
     // 左部间隙
-    private int LEFT_GAP = 5; // 至少10
-    // header和footer的高度和
-    public static final int FHHeight = 350;
+    private int LEFT_GAP = 10; // 至少10
 
     // 棋盘宽度(屏幕宽度)
     private float CBWidth = 0;
-    // 棋盘高度
-    private int CBHeight = 0;
     // 棋盘单位宽度
     private int CellWidth = 0;
 
@@ -78,10 +73,8 @@ public class GameActivity extends AppCompatActivity {
     private TextView StatusLeft = null;
     private TextView StatusRight = null;
     private ImageView IconLeft = null;
-    private ImageView IocnRight = null;
-    private RelativeLayout HeaderLayout = null;
+    private ImageView IconRight = null;
     private AbsoluteLayout CBLayout = null;
-    private RelativeLayout FooterLayout = null;
 
     // 玩家1和玩家2的棋局状态
     private CheckNode[] checkNode = null;
@@ -124,22 +117,16 @@ public class GameActivity extends AppCompatActivity {
         StatusLeft = (TextView)findViewById(R.id.status_left);
         StatusRight = (TextView)findViewById(R.id.status_right);
         IconLeft = (ImageView)findViewById(R.id.icon_left);
-        IocnRight = (ImageView)findViewById(R.id.icon_right);
-        HeaderLayout = (RelativeLayout)findViewById(R.id.game_header);
+        IconRight = (ImageView)findViewById(R.id.icon_right);
         CBLayout = (AbsoluteLayout) findViewById(R.id.layout_chessboard);
-        FooterLayout = (RelativeLayout)findViewById(R.id.game_footer);
 
         // 棋盘宽高
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int ScreenW = dm.widthPixels;
-        int ScreenH = dm.heightPixels;
+        //int ScreenH = dm.heightPixels;
 
-        int offset = ScreenH - ScreenW - FHHeight; //350是header和footer的高度和
-        if (offset < -2*LEFT_GAP)
-            LEFT_GAP = -(offset/2);
         CBWidth = ScreenW - 2*LEFT_GAP;
-        CBHeight = (int)(CBWidth/H_NUM*V_NUM);
         CellWidth = (int)(CBWidth/H_NUM);
 
         // 棋盘二维数组
@@ -189,7 +176,7 @@ public class GameActivity extends AppCompatActivity {
                 if (event.getAction() == MotionEvent.ACTION_DOWN){
                     // 横坐标
 
-                    float touchX = event.getX();
+                    float touchX = event.getX() - LEFT_GAP;
                     // 列数
                     int column = (int)(touchX/CellWidth);
                     // 计算并落子
@@ -354,12 +341,20 @@ public class GameActivity extends AppCompatActivity {
         if (gameResult == 0){
             StatusLeft.setText("Draw");
             StatusRight.setText("Draw");
+            IconLeft.setImageResource(R.drawable.chess_p1_win);
+            IconRight.setImageResource(R.drawable.chess_p2_win);
         }else if (gameResult == 1){
             StatusLeft.setText("Your trun!");
             StatusRight.setText("");
+
+            IconLeft.setImageResource(R.drawable.chess_p1_win);
+            IconRight.setImageResource(R.drawable.chess_p2);
         }else if (gameResult == 2){
             StatusLeft.setText("");
             StatusRight.setText("Your turn!");
+
+            IconLeft.setImageResource(R.drawable.chess_p1);
+            IconRight.setImageResource(R.drawable.chess_p2_win);
         }else if(gameResult == 11){
             StatusLeft.setText("Your Win!");
             StatusRight.setText("");

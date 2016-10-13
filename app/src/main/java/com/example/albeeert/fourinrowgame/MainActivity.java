@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
     // 当前页面是否活跃
     private boolean isActive = true;
 
+    /**
+     * Activity life cycle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
