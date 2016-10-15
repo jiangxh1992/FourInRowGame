@@ -328,7 +328,7 @@ public class GameActivity extends AppCompatActivity {
                 UpdateUI(11);
             else
                 UpdateUI(22);
-             // 游戏结束
+            // 游戏结束
             GameOver();
         }
 

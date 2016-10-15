@@ -9,7 +9,7 @@
     android:background="#000000"
     tools:context="com.example.albeeert.fourinrowgame.GameActivity">
 
-        <!--Game Header-->
+    <!--Game Header-->
     <RelativeLayout
         android:id="@+id/game_header"
         android:layout_width="fill_parent"
@@ -37,7 +37,7 @@
 
         <TextView
             android:text=""
-            android:textColor="#ffffff"
+            android:textColor="#ff1403"
             android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
 
         <TextView
             android:text=""
-            android:textColor="#ffffff"
+            android:textColor="#ff1003"
             android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
