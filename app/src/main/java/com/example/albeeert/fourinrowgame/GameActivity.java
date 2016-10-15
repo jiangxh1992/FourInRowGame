@@ -70,6 +70,7 @@ public class GameActivity extends AppCompatActivity {
     // 获取xml的UI组件引用
     private Button ReStartButton = null;
     private Button WithDrawButton = null;
+    private TextView StatusTop = null;
     private TextView StatusLeft = null;
     private TextView StatusRight = null;
     private ImageView IconLeft = null;
@@ -114,6 +115,7 @@ public class GameActivity extends AppCompatActivity {
         // UI 初始化
         ReStartButton = (Button)findViewById(R.id.button_restart);
         WithDrawButton = (Button)findViewById(R.id.button_withdraw);
+        StatusTop = (TextView)findViewById(R.id.topStatus);
         StatusLeft = (TextView)findViewById(R.id.status_left);
         StatusRight = (TextView)findViewById(R.id.status_right);
         IconLeft = (ImageView)findViewById(R.id.icon_left);
@@ -309,9 +311,6 @@ public class GameActivity extends AppCompatActivity {
         }
         // 是否有人赢
         int result = CheckResult(point);
-        // 重置检测状态
-        checkNode[0].Reset();
-        checkNode[1].Reset();
 
         if (result == 0){
             // 换人继续
@@ -323,15 +322,79 @@ public class GameActivity extends AppCompatActivity {
                 UpdateUI(gameResult);
             }
         }else {
-
-            if (gameResult == 1)
+            // 已经有人赢了
+            // 显示获胜的棋子
+            SearchWonPieces(point);
+            // 更新UI
+            if (gameResult == 1){
+                // 玩家1赢
                 UpdateUI(11);
-            else
+            }else {
+                // 玩家2赢
                 UpdateUI(22);
+            }
+
             // 游戏结束
             GameOver();
         }
+        // 重置检测状态
+        checkNode[0].Reset();
+        checkNode[1].Reset();
 
+    }
+
+    /**
+     * 显示获胜的棋子
+     */
+    public void SearchWonPieces(Point point){
+        // 判断是哪个玩家赢了
+        int winimg = 0;
+        if (gameResult == 1)
+            winimg = R.drawable.chess_p1_win;
+        else if (gameResult == 2)
+            winimg = R.drawable.chess_p2_win;
+        else{
+            System.out.print("error!");
+            return;
+        }
+        // 最后下的一个棋子
+        ChessBord[point.x][point.y].image.setImageResource(winimg);
+        // 某个方向上最多的相同棋子个数肯定不会比最大宽度或者高度棋子数多
+        int maxStep = H_NUM > V_NUM ? H_NUM : V_NUM;
+        for (int i=1 ; i<maxStep; i++){
+            // 上
+            if (checkNode[gameResult-1].Vertical >= 4 && (point.y + i < V_NUM) && ChessBord[point.x][point.y + i].value == gameResult) {
+                ChessBord[point.x][point.y + i].image.setImageResource(winimg);//是当前获胜棋子
+            }
+            // 下
+            if (checkNode[gameResult-1].Vertical >= 4 && (point.y - i >= 0) && ChessBord[point.x][point.y - i].value == gameResult) {
+                ChessBord[point.x][point.y - i].image.setImageResource(winimg);
+            }
+            // 左
+            if (checkNode[gameResult-1].Horizontal >= 4 && (point.x - i >= 0) && ChessBord[point.x - i][point.y].value != gameResult) {
+                ChessBord[point.x - i][point.y].image.setImageResource(winimg);
+            }
+            // 右
+            if (checkNode[gameResult-1].Horizontal >= 4 && (point.x + i < H_NUM) && ChessBord[point.x + i][point.y].value != gameResult) {
+                ChessBord[point.x + i][point.y].image.setImageResource(winimg);
+            }
+            // 左上
+            if (checkNode[gameResult-1].ADiagonal >= 4 && (point.x - i >= 0) && (point.y + i < V_NUM) && (ChessBord[point.x - i][point.y + i].value != gameResult)) {
+                ChessBord[point.x - i][point.y + i].image.setImageResource(winimg);
+            }
+            // 右下
+            if (checkNode[gameResult-1].ADiagonal >= 4 && (point.x + i < H_NUM) && (point.y - i >= 0) && (ChessBord[point.x + i][point.y - i].value != gameResult)) {
+                ChessBord[point.x + i][point.y - i].image.setImageResource(winimg);
+            }
+            // 右上
+            if (checkNode[gameResult-1].MDiagonal >= 4 && (point.x + i < H_NUM) && (point.y + i < V_NUM) && (ChessBord[point.x + i][point.y + i].value != gameResult)) {
+                ChessBord[point.x + i][point.y + i].image.setImageResource(winimg);
+            }
+            // 左下
+            if (checkNode[gameResult-1].MDiagonal >= 4 && (point.x - i >= 0) && (point.y - i >= 0) && (ChessBord[point.x - i][point.y - i].value != gameResult)) {
+                ChessBord[point.x - i][point.y - i].image.setImageResource(winimg);
+            }
+        }
     }
 
     /**
@@ -339,28 +402,40 @@ public class GameActivity extends AppCompatActivity {
      */
     public void UpdateUI(int gameResult){
         if (gameResult == 0){
-            StatusLeft.setText("Draw");
-            StatusRight.setText("Draw");
+            // 平局
+            StatusTop.setText("Draw");
+            StatusLeft.setText("");
+            StatusRight.setText("");
+            // 两个玩家都高亮
             IconLeft.setImageResource(R.drawable.chess_p1_win);
             IconRight.setImageResource(R.drawable.chess_p2_win);
-        }else if (gameResult == 1){
-            StatusLeft.setText("Your trun!");
-            StatusRight.setText("");
 
+        }else if (gameResult == 1){
+            // 玩家1下棋
+            StatusLeft.setText("   !");
+            StatusRight.setText("");
+            // 玩家1高亮
             IconLeft.setImageResource(R.drawable.chess_p1_win);
             IconRight.setImageResource(R.drawable.chess_p2);
-        }else if (gameResult == 2){
-            StatusLeft.setText("");
-            StatusRight.setText("Your turn!");
 
+        }else if (gameResult == 2){
+            // 玩家2下棋
+            StatusLeft.setText("");
+            StatusRight.setText("!   ");
+            // 玩家2高亮
             IconLeft.setImageResource(R.drawable.chess_p1);
             IconRight.setImageResource(R.drawable.chess_p2_win);
+
         }else if(gameResult == 11){
-            StatusLeft.setText("Your Win!");
+            // 玩家1赢
+            StatusLeft.setText("Win!");
             StatusRight.setText("");
+
         }else if (gameResult == 22){
+            // 玩家2赢
             StatusLeft.setText("");
-            StatusRight.setText("Your Win!");
+            StatusRight.setText("Win!");
+
         }else {
             return;
         }
