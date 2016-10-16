@@ -371,27 +371,27 @@ public class GameActivity extends AppCompatActivity {
                 ChessBord[point.x][point.y - i].image.setImageResource(winimg);
             }
             // 左
-            if (checkNode[gameResult-1].Horizontal >= 4 && (point.x - i >= 0) && ChessBord[point.x - i][point.y].value != gameResult) {
+            if (checkNode[gameResult-1].Horizontal >= 4 && (point.x - i >= 0) && ChessBord[point.x - i][point.y].value == gameResult) {
                 ChessBord[point.x - i][point.y].image.setImageResource(winimg);
             }
             // 右
-            if (checkNode[gameResult-1].Horizontal >= 4 && (point.x + i < H_NUM) && ChessBord[point.x + i][point.y].value != gameResult) {
+            if (checkNode[gameResult-1].Horizontal >= 4 && (point.x + i < H_NUM) && ChessBord[point.x + i][point.y].value == gameResult) {
                 ChessBord[point.x + i][point.y].image.setImageResource(winimg);
             }
             // 左上
-            if (checkNode[gameResult-1].ADiagonal >= 4 && (point.x - i >= 0) && (point.y + i < V_NUM) && (ChessBord[point.x - i][point.y + i].value != gameResult)) {
+            if (checkNode[gameResult-1].ADiagonal >= 4 && (point.x - i >= 0) && (point.y + i < V_NUM) && (ChessBord[point.x - i][point.y + i].value == gameResult)) {
                 ChessBord[point.x - i][point.y + i].image.setImageResource(winimg);
             }
             // 右下
-            if (checkNode[gameResult-1].ADiagonal >= 4 && (point.x + i < H_NUM) && (point.y - i >= 0) && (ChessBord[point.x + i][point.y - i].value != gameResult)) {
+            if (checkNode[gameResult-1].ADiagonal >= 4 && (point.x + i < H_NUM) && (point.y - i >= 0) && (ChessBord[point.x + i][point.y - i].value == gameResult)) {
                 ChessBord[point.x + i][point.y - i].image.setImageResource(winimg);
             }
             // 右上
-            if (checkNode[gameResult-1].MDiagonal >= 4 && (point.x + i < H_NUM) && (point.y + i < V_NUM) && (ChessBord[point.x + i][point.y + i].value != gameResult)) {
+            if (checkNode[gameResult-1].MDiagonal >= 4 && (point.x + i < H_NUM) && (point.y + i < V_NUM) && (ChessBord[point.x + i][point.y + i].value == gameResult)) {
                 ChessBord[point.x + i][point.y + i].image.setImageResource(winimg);
             }
             // 左下
-            if (checkNode[gameResult-1].MDiagonal >= 4 && (point.x - i >= 0) && (point.y - i >= 0) && (ChessBord[point.x - i][point.y - i].value != gameResult)) {
+            if (checkNode[gameResult-1].MDiagonal >= 4 && (point.x - i >= 0) && (point.y - i >= 0) && (ChessBord[point.x - i][point.y - i].value == gameResult)) {
                 ChessBord[point.x - i][point.y - i].image.setImageResource(winimg);
             }
         }
