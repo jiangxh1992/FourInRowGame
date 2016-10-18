@@ -1,6 +1,9 @@
 package com.example.albeeert.fourinrowgame;
 
 import android.graphics.Point;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -91,6 +94,11 @@ public class GameActivity extends AppCompatActivity {
     // 落子计数器
     private int pieceCount = 0;
 
+    // 音效池
+    private SoundPool soundPool;
+    // 背景音乐播放器
+    private MediaPlayer media_bg;
+
     /**
      * 游戏界面初始化入口
      */
@@ -121,6 +129,23 @@ public class GameActivity extends AppCompatActivity {
         IconLeft = (ImageView)findViewById(R.id.icon_left);
         IconRight = (ImageView)findViewById(R.id.icon_right);
         CBLayout = (AbsoluteLayout) findViewById(R.id.layout_chessboard);
+
+        // 音效初始化
+        soundPool = new SoundPool(4, AudioManager.STREAM_SYSTEM,5);
+        soundPool.load(this, R.raw.game_bg, 1);  // 背景音效(弃用)
+        soundPool.load(this, R.raw.peng, 2);     // 落子音效
+        soundPool.load(this, R.raw.dingdong, 3); // 玩家胜利音效
+        soundPool.load(this, R.raw.dingdong, 4); // 平局音效
+        // 背景音乐
+        media_bg = MediaPlayer.create(this, R.raw.game_bg);
+        media_bg.start();
+        // 循环播放
+        media_bg.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                media_bg.start();
+            }
+        });
 
         // 棋盘宽高
         DisplayMetrics dm = new DisplayMetrics();
@@ -191,6 +216,8 @@ public class GameActivity extends AppCompatActivity {
         // 默认玩家1先手
         gameResult = 1;
         UpdateUI(1);
+        // 保证隐藏draw
+        StatusTop.setText("");
 
         // 落子计数器
         pieceCount = 0;
@@ -409,6 +436,8 @@ public class GameActivity extends AppCompatActivity {
             // 两个玩家都高亮
             IconLeft.setImageResource(R.drawable.chess_p1_win);
             IconRight.setImageResource(R.drawable.chess_p2_win);
+            // 平局音效
+            soundPool.play(4,1,1,0,0,1);
 
         }else if (gameResult == 1){
             // 玩家1下棋
@@ -430,11 +459,15 @@ public class GameActivity extends AppCompatActivity {
             // 玩家1赢
             StatusLeft.setText("Win!");
             StatusRight.setText("");
+            // 胜利音效
+            soundPool.play(3,1,1,2,0,1);
 
         }else if (gameResult == 22){
             // 玩家2赢
             StatusLeft.setText("");
             StatusRight.setText("Win!");
+            // 胜利音效
+            soundPool.play(3,1,1,2,0,1);
 
         }else {
             return;
@@ -447,6 +480,9 @@ public class GameActivity extends AppCompatActivity {
      */
     public void DrawPiece(Point point){
 
+        // 播放音效
+        soundPool.play(2,1,1,1,0,1);
+        // 绘制
         ImageView piece = ChessBord[point.x][point.y].image;
         if (gameResult == 1){
             piece.setImageResource(R.drawable.chess_p1);
