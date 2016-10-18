@@ -2,14 +2,12 @@ package com.example.albeeert.fourinrowgame;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-
-import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -113,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
         new Thread(animationThread).start();
     }
 
+    // 离开当前mainactivity
     @Override
     protected void onPause() {
         super.onPause();
@@ -123,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
         isActive = false;
     }
 
+    // 回到mainactivity
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -131,6 +131,12 @@ public class MainActivity extends AppCompatActivity {
         media_bg.start();
         // 开始按钮浮动动画
         new Thread(animationThread).start();
+    }
+
+    // 返回键
+    @Override
+    public void  onBackPressed(){
+        System.exit(0);// 退出程序
     }
 
     /**

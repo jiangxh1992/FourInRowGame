@@ -114,6 +114,14 @@ public class GameActivity extends AppCompatActivity {
         GameInit();
 
     }
+    /**
+     * 返回键监听
+     */
+    @Override
+    public void onBackPressed(){
+        // 关闭背景音乐
+        media_bg.stop();
+    }
 
     /**
      * 全局初始化(只初始化一次)
@@ -391,35 +399,62 @@ public class GameActivity extends AppCompatActivity {
         for (int i=1 ; i<maxStep; i++){
             // 上
             if (checkNode[gameResult-1].Vertical >= 4 && (point.y + i < V_NUM) && ChessBord[point.x][point.y + i].value == gameResult) {
-                ChessBord[point.x][point.y + i].image.setImageResource(winimg);//是当前获胜棋子
+                // 满足不越棋盘的界，并且是当前获胜玩家的棋子
+                UpdateWinImage(new Point(point.x, point.y+i), new Point(point.x, point.y+i-1), winimg);
             }
             // 下
             if (checkNode[gameResult-1].Vertical >= 4 && (point.y - i >= 0) && ChessBord[point.x][point.y - i].value == gameResult) {
-                ChessBord[point.x][point.y - i].image.setImageResource(winimg);
+                //ChessBord[point.x][point.y - i].image.setImageResource(winimg);
+                UpdateWinImage(new Point(point.x, point.y-i), new Point(point.x, point.y-i+1), winimg);
             }
             // 左
             if (checkNode[gameResult-1].Horizontal >= 4 && (point.x - i >= 0) && ChessBord[point.x - i][point.y].value == gameResult) {
-                ChessBord[point.x - i][point.y].image.setImageResource(winimg);
+                //ChessBord[point.x - i][point.y].image.setImageResource(winimg);
+                UpdateWinImage(new Point(point.x-i, point.y), new Point(point.x-i+1, point.y), winimg);
             }
             // 右
             if (checkNode[gameResult-1].Horizontal >= 4 && (point.x + i < H_NUM) && ChessBord[point.x + i][point.y].value == gameResult) {
-                ChessBord[point.x + i][point.y].image.setImageResource(winimg);
+                //ChessBord[point.x + i][point.y].image.setImageResource(winimg);
+                UpdateWinImage(new Point(point.x+i, point.y), new Point(point.x+i-1, point.y), winimg);
             }
             // 左上
             if (checkNode[gameResult-1].ADiagonal >= 4 && (point.x - i >= 0) && (point.y + i < V_NUM) && (ChessBord[point.x - i][point.y + i].value == gameResult)) {
-                ChessBord[point.x - i][point.y + i].image.setImageResource(winimg);
+                //ChessBord[point.x - i][point.y + i].image.setImageResource(winimg);
+                UpdateWinImage(new Point(point.x-i, point.y+i), new Point(point.x-i+1, point.y+i-1), winimg);
             }
             // 右下
             if (checkNode[gameResult-1].ADiagonal >= 4 && (point.x + i < H_NUM) && (point.y - i >= 0) && (ChessBord[point.x + i][point.y - i].value == gameResult)) {
-                ChessBord[point.x + i][point.y - i].image.setImageResource(winimg);
+                //ChessBord[point.x + i][point.y - i].image.setImageResource(winimg);
+                UpdateWinImage(new Point(point.x+i, point.y-i), new Point(point.x+i-1, point.y-i+1), winimg);
             }
             // 右上
             if (checkNode[gameResult-1].MDiagonal >= 4 && (point.x + i < H_NUM) && (point.y + i < V_NUM) && (ChessBord[point.x + i][point.y + i].value == gameResult)) {
-                ChessBord[point.x + i][point.y + i].image.setImageResource(winimg);
+                //ChessBord[point.x + i][point.y + i].image.setImageResource(winimg);
+                UpdateWinImage(new Point(point.x+i, point.y+i), new Point(point.x+i-1, point.y+i-1), winimg);
             }
             // 左下
             if (checkNode[gameResult-1].MDiagonal >= 4 && (point.x - i >= 0) && (point.y - i >= 0) && (ChessBord[point.x - i][point.y - i].value == gameResult)) {
-                ChessBord[point.x - i][point.y - i].image.setImageResource(winimg);
+                //ChessBord[point.x - i][point.y - i].image.setImageResource(winimg);
+                UpdateWinImage(new Point(point.x-i, point.y-i), new Point(point.x-i+1, point.y-i+1), winimg);
+            }
+        }
+    }
+
+    /**
+     * 替换获胜棋子图片(这里要同时检验当前获胜棋子是否和上一个连续，如果中间有对方棋子间隔那么当前这个获胜玩家的棋子并不是真的获胜棋子)
+     */
+    public void UpdateWinImage(Point curPoint, Point prePoint, int winimg){
+        if (ChessBord[curPoint.x][curPoint.y].value == ChessBord[prePoint.x][prePoint.y].value){
+            ChessBord[curPoint.x][curPoint.y].image.setImageResource(winimg);
+        }else {
+            // 出现不连续获胜棋子则将这一排剩下的所有获胜玩家的棋子全部排除掉（事实上顶多出现两个不连续的获胜玩家棋子，因为H_NUM为7）
+            int delX = curPoint.x - prePoint.x;
+            int delY = curPoint.y - prePoint.y;
+            Point nextPoint = new Point(curPoint.x+delX, curPoint.y+delY);
+            while (nextPoint.x>=0 && nextPoint.x<H_NUM && nextPoint.y>=0 && nextPoint.y<V_NUM){
+                ChessBord[nextPoint.x][nextPoint.y].value = 0;
+                nextPoint.x += delX;
+                nextPoint.y += delY;
             }
         }
     }
