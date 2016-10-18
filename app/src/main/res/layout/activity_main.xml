@@ -43,4 +43,13 @@
         android:layout_y="-19dp"
         android:id="@+id/cloud3" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:background="@drawable/startready"
+        android:layout_x="55dp"
+        android:layout_y="136dp"
+        android:id="@+id/start_ready" />
+
 </AbsoluteLayout>

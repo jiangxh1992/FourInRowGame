@@ -1,12 +1,15 @@
 package com.example.albeeert.fourinrowgame;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
     private final float cloudspeed1 = 8.0f;
     private final float cloudspeed2 = 15.0f;
     private final float cloudspeed3 = 12.0f;
+
+    // 准备图片
+    private ImageView ready = null;
 
     // 开始游戏按钮
     private Button startGameBtn = null;
@@ -39,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
     // 当前页面是否活跃
     private boolean isActive = true;
 
+    // 音乐播放器
+    private static MediaPlayer media_bg;    // 背景音乐
+    private static MediaPlayer media_start; // 游戏开始音乐
+
     /**
      * Activity life cycle
      */
@@ -55,6 +65,29 @@ public class MainActivity extends AppCompatActivity {
         cloud1 = (ImageView) findViewById(R.id.cloud1);
         cloud2 = (ImageView) findViewById(R.id.cloud2);
         cloud3 = (ImageView) findViewById(R.id.cloud3);
+        // 准备图片
+        ready = (ImageView) findViewById(R.id.start_ready);
+
+        // 初始化声音播放器
+        media_bg = MediaPlayer.create(this, R.raw.menu_bg);
+        media_bg.start();
+        // 实现循环播放
+        media_bg.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                media_bg.start();
+            }
+        });
+        media_start = MediaPlayer.create(this, R.raw.zombiesmile);
+        // 监听音效结束事件
+        media_start.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                // 跳转到游戏界面
+                Intent intent = new Intent(getBaseContext(),GameActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // Y坐标
         DisplayMetrics dm = new DisplayMetrics();
@@ -67,9 +100,10 @@ public class MainActivity extends AppCompatActivity {
         startGameBtn.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                // 跳转到游戏界面
-                                                Intent intent = new Intent(getBaseContext(),GameActivity.class);
-                                                startActivity(intent);
+                                                // 播放音效
+                                                media_start.start();
+                                                // 显示准备图片
+                                                ready.setVisibility(View.VISIBLE);
                                             }
                                         }
         );
@@ -82,6 +116,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        // 暂停背景音乐
+        media_bg.pause();
+        // 隐藏准备图片
+        ready.setVisibility(View.INVISIBLE);
         isActive = false;
     }
 
@@ -89,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         isActive = true;
+        // 继续背景音乐
+        media_bg.start();
         // 开始按钮浮动动画
         new Thread(animationThread).start();
     }
