@@ -95,9 +95,9 @@ public class GameActivity extends AppCompatActivity {
     private int pieceCount = 0;
 
     // 音效池
-    private SoundPool soundPool;
+    private SoundPool soundPool = null;
     // 背景音乐播放器
-    private MediaPlayer media_bg;
+    private MediaPlayer media_bg = null;
 
     /**
      * 游戏界面初始化入口
@@ -121,6 +121,7 @@ public class GameActivity extends AppCompatActivity {
     public void onBackPressed(){
         // 关闭背景音乐
         media_bg.stop();
+        this.finish();
     }
 
     /**
@@ -232,7 +233,6 @@ public class GameActivity extends AppCompatActivity {
 
         // 初始化栈
         PieceStack = new ArrayList<Point>();
-
     }
 
     /**
@@ -357,7 +357,7 @@ public class GameActivity extends AppCompatActivity {
                 UpdateUI(gameResult);
             }
         }else {
-            // 已经有人赢了
+            /** 已经有人赢了 **/
             // 显示获胜的棋子
             SearchWonPieces(point);
             // 更新UI

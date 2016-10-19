@@ -102,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
                                                 media_start.start();
                                                 // 显示准备图片
                                                 ready.setVisibility(View.VISIBLE);
+                                                // 停止动画
+                                                isActive = false;
                                             }
                                         }
         );
@@ -135,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
     // 返回键
     @Override
-    public void  onBackPressed(){
+    public void onBackPressed(){
         System.exit(0);// 退出程序
     }
 
@@ -149,9 +151,9 @@ public class MainActivity extends AppCompatActivity {
             // update
             while (isActive) {
                 try {
+                    Thread.sleep(Interval);
                     // 1.开始按钮浮动
                     sinAngle += 0.3f;
-                    Thread.sleep(Interval);
                     startGameBtn.setY(initY + (float)(range*Math.sin(sinAngle)));
 
                     // 2.云朵移动
