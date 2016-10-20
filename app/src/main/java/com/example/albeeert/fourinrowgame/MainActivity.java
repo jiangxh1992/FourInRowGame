@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     // 音乐播放器
     private static MediaPlayer media_bg;    // 背景音乐
     private static MediaPlayer media_start; // 游戏开始音乐
+    private static MediaPlayer media_button; // 按钮音效
 
     /**
      * Activity life cycle
@@ -148,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
      * 音效设置
      */
     public void AudioInit(){
-        // 初始化声音播放器
+        // 1.背景音乐
         media_bg = MediaPlayer.create(this, R.raw.menu_bg);
         media_bg.start();
         // 实现循环播放
@@ -158,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
                 media_bg.start();
             }
         });
+
+        // 2.开始按钮音效
         media_start = MediaPlayer.create(this, R.raw.zombiesmile);
         // 监听音效结束事件
         media_start.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -168,6 +171,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // 3.普通按钮音效
+        media_button = MediaPlayer.create(this, R.raw.yoho);
     }
 
     /**
@@ -192,6 +198,8 @@ public class MainActivity extends AppCompatActivity {
         dataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 播放音效
+                media_button.start();
                 // 获取本地数据
                 SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME,0);
                 int dataP1 = sharedPreferences.getInt("data_player1",0);
