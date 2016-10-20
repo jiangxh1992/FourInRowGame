@@ -1,11 +1,12 @@
 package com.example.albeeert.fourinrowgame;
 
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,7 +23,6 @@ class CheckNode{
     int Vertical;   // 竖直方向...
     int MDiagonal;  // 主对角线...
     int ADiagonal;  // 辅对角线...
-
     // 构造
     CheckNode(){
         Horizontal = 1;
@@ -58,6 +58,9 @@ class Piece{
 
 /*** 游戏界面 ***/
 public class GameActivity extends AppCompatActivity {
+
+    // 数据存储
+    public final String PREFS_NAME = "JXHFile";
 
     // 棋盘横竖棋子个数
     public static final int H_NUM = 7;
@@ -360,6 +363,8 @@ public class GameActivity extends AppCompatActivity {
             /** 已经有人赢了 **/
             // 显示获胜的棋子
             SearchWonPieces(point);
+            // 更新数据
+            setData(gameResult);
             // 更新UI
             if (gameResult == 1){
                 // 玩家1赢
@@ -625,6 +630,28 @@ public class GameActivity extends AppCompatActivity {
         }
         // 计数-1
         --pieceCount;
+    }
+
+    /**
+     * 更新数据
+     */
+    public void setData(int player){
+        // 简单数据存储
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME,0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        // 获取旧数据
+        int dataP1 = sharedPreferences.getInt("data_player1",0);
+        int dataP2 = sharedPreferences.getInt("data_player2",0);
+        // 更新数据
+        if (player == 1){
+            editor.putInt("data_player1", dataP1+1);
+        }else if (player == 2){
+            editor.putInt("data_player2", dataP2+1);
+        }else {
+            return;
+        }
+        // 提交数据
+        editor.commit();
     }
 
 

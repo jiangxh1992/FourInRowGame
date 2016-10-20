@@ -52,4 +52,14 @@
         android:layout_y="136dp"
         android:id="@+id/start_ready" />
 
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/databutton"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/data_button"
+        android:layout_marginBottom="0dp"
+        android:layout_x="190dp"
+        android:layout_y="384dp" />
+
 </AbsoluteLayout>

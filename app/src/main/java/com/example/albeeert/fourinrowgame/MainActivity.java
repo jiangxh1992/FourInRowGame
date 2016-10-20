@@ -1,6 +1,8 @@
 package com.example.albeeert.fourinrowgame;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +13,9 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
+    // 数据存储
+    public final String PREFS_NAME = "JXHFile";
+
     // 云朵
     private ImageView cloud1 = null;
     private ImageView cloud2 = null;
@@ -19,12 +24,11 @@ public class MainActivity extends AppCompatActivity {
     private final float cloudspeed1 = 8.0f;
     private final float cloudspeed2 = 15.0f;
     private final float cloudspeed3 = 12.0f;
-
-    // 准备图片
+    // 游戏准备图片
     private ImageView ready = null;
-
-    // 开始游戏按钮
+    // 开始游戏按钮和玩家数据按钮
     private Button startGameBtn = null;
+    private Button dataButton = null;
     // 按钮浮动幅度
     private final float range = 10.0f;
     // 计时间隔
@@ -53,60 +57,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // 初始化
-        setContentView(R.layout.activity_main);
-
-        // 获取开始游戏按钮
-        startGameBtn = (Button)findViewById(R.id.startbutton);
-        // 云朵
-        cloud1 = (ImageView) findViewById(R.id.cloud1);
-        cloud2 = (ImageView) findViewById(R.id.cloud2);
-        cloud3 = (ImageView) findViewById(R.id.cloud3);
-        // 准备图片
-        ready = (ImageView) findViewById(R.id.start_ready);
-
-        // 初始化声音播放器
-        media_bg = MediaPlayer.create(this, R.raw.menu_bg);
-        media_bg.start();
-        // 实现循环播放
-        media_bg.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                media_bg.start();
-            }
-        });
-        media_start = MediaPlayer.create(this, R.raw.zombiesmile);
-        // 监听音效结束事件
-        media_start.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                // 跳转到游戏界面
-                Intent intent = new Intent(getBaseContext(),GameActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // Y坐标
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-        ScreenH = dm.heightPixels;
-        ScreenW = dm.widthPixels;
-        initY = ScreenH/3*2;
-
-        // 添加按钮点击事件
-        startGameBtn.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                // 播放音效
-                                                media_start.start();
-                                                // 显示准备图片
-                                                ready.setVisibility(View.VISIBLE);
-                                                // 停止动画
-                                                isActive = false;
-                                            }
-                                        }
-        );
+        // 界面初始化
+        UIInit();
+        // 音效设置
+        AudioInit();
+        // 事件监听
+        setListener();
 
         // 开始按钮浮动动画
         animationThread = new MyThread();
@@ -139,6 +95,100 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         System.exit(0);// 退出程序
+    }
+
+    /**
+     *  界面初始化
+     */
+    public void UIInit(){
+        // 基本静态界面
+        setContentView(R.layout.activity_main);
+
+        // 获取开始游戏按钮
+        startGameBtn = (Button)findViewById(R.id.startbutton);
+        // 玩家数据按钮
+        dataButton = (Button)findViewById(R.id.databutton);
+        // 云朵
+        cloud1 = (ImageView) findViewById(R.id.cloud1);
+        cloud2 = (ImageView) findViewById(R.id.cloud2);
+        cloud3 = (ImageView) findViewById(R.id.cloud3);
+        // 游戏准备图片
+        ready = (ImageView) findViewById(R.id.start_ready);
+
+        // 屏幕尺寸
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        ScreenH = dm.heightPixels;
+        ScreenW = dm.widthPixels;
+        // 开始按钮起始位置
+        initY = ScreenH*2/3;
+        //startGameBtn.setX(ScreenW*3/8);
+        //startGameBtn.setY(initY);
+        // 玩家数据按钮起始位置
+        //dataButton.setX(ScreenW-170);
+        //dataButton.setY(ScreenH-150);
+    }
+
+    /**
+     * 音效设置
+     */
+    public void AudioInit(){
+        // 初始化声音播放器
+        media_bg = MediaPlayer.create(this, R.raw.menu_bg);
+        media_bg.start();
+        // 实现循环播放
+        media_bg.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                media_bg.start();
+            }
+        });
+        media_start = MediaPlayer.create(this, R.raw.zombiesmile);
+        // 监听音效结束事件
+        media_start.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                // 跳转到游戏界面
+                Intent intent = new Intent(getBaseContext(),GameActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    /**
+     * 事件监听
+     */
+    public void setListener(){
+        // 开始游戏按钮点击事件
+        startGameBtn.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                // 播放音效
+                                                media_start.start();
+                                                // 显示准备图片
+                                                ready.setVisibility(View.VISIBLE);
+                                                // 停止动画
+                                                isActive = false;
+                                            }
+                                        }
+        );
+
+        // 玩家数据按钮点击事件
+        dataButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 获取本地数据
+                SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME,0);
+                int dataP1 = sharedPreferences.getInt("data_player1",0);
+                int dataP2 = sharedPreferences.getInt("data_player2",0);
+                System.out.print("datap1:"+dataP1+";  "+"datap2:"+dataP2+"\n");
+
+                // 弹出窗口
+                Dialog dialog = new Dialog(MainActivity.this);
+                //dialog.setContentView();
+                dialog.show();
+            }
+        });
     }
 
     /**
