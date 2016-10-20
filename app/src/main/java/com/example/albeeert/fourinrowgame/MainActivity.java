@@ -7,9 +7,11 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
     // 开始游戏按钮和玩家数据按钮
     private Button startGameBtn = null;
     private Button dataButton = null;
+    // 对话框
+    private View dialogView;
+    // 弹出窗口
+    private Dialog dialog;
+
+
     // 按钮浮动幅度
     private final float range = 10.0f;
     // 计时间隔
@@ -114,6 +122,13 @@ public class MainActivity extends AppCompatActivity {
         cloud3 = (ImageView) findViewById(R.id.cloud3);
         // 游戏准备图片
         ready = (ImageView) findViewById(R.id.start_ready);
+        // 对话框
+        dialogView= LayoutInflater.from(this).inflate(
+                R.layout.data_dialog, null);
+        dialog = new Dialog(MainActivity.this);
+        dialog.setTitle("Player Data");
+        dialog.setContentView(dialogView);
+        dialog.setCanceledOnTouchOutside(true);
 
         // 屏幕尺寸
         DisplayMetrics dm = new DisplayMetrics();
@@ -181,12 +196,17 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME,0);
                 int dataP1 = sharedPreferences.getInt("data_player1",0);
                 int dataP2 = sharedPreferences.getInt("data_player2",0);
-                System.out.print("datap1:"+dataP1+";  "+"datap2:"+dataP2+"\n");
+                //System.out.print("datap1:"+dataP1+";  "+"datap2:"+dataP2+"\n");
+
+                // 更新对话框文字数据
+                TextView player1DataShow = (TextView) dialogView.findViewById(R.id.player1datashow);
+                TextView player2DataShow = (TextView) dialogView.findViewById(R.id.player2datashow);
+                player1DataShow.setText("PLAYER1 WIN:  "+dataP1);
+                player2DataShow.setText("PLAYER2 WIN:  "+dataP2);
 
                 // 弹出窗口
-                Dialog dialog = new Dialog(MainActivity.this);
-                //dialog.setContentView();
                 dialog.show();
+
             }
         });
     }
