@@ -209,8 +209,8 @@ public class MainActivity extends AppCompatActivity {
                 // 更新对话框文字数据
                 TextView player1DataShow = (TextView) dialogView.findViewById(R.id.player1datashow);
                 TextView player2DataShow = (TextView) dialogView.findViewById(R.id.player2datashow);
-                player1DataShow.setText("PLAYER1 WIN:  "+dataP1);
-                player2DataShow.setText("PLAYER2 WIN:  "+dataP2);
+                player1DataShow.setText(String.valueOf(dataP1));
+                player2DataShow.setText(String.valueOf(dataP2));
 
                 // 弹出窗口
                 dialog.show();
@@ -230,11 +230,12 @@ public class MainActivity extends AppCompatActivity {
             while (isActive) {
                 try {
                     Thread.sleep(Interval);
-                    // 1.开始按钮浮动
+                    // 1.按钮浮动
                     sinAngle += 0.3f;
                     startGameBtn.setY(initY + (float)(range*Math.sin(sinAngle)));
+                    dataButton.setX((float)(range/3*Math.sin(sinAngle)));
 
-                    // 2.云朵移动
+                    // 3.云朵移动
                     if (cloud1.getX() < -500)
                         cloud1.setX(ScreenW + 10.0f);
                     cloud1.setX(cloud1.getX() - cloudspeed1);
