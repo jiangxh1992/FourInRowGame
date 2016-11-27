@@ -16,7 +16,6 @@ tags: [android]
 
 
 
-***Github源码：*** [https://github.com/jiangxh1992/FourInRowGame](https://github.com/jiangxh1992/FourInRowGame)
 
 ***视频演示：*** [https://vimeo.com/187532089](https://vimeo.com/187532089)
 
@@ -37,9 +36,7 @@ tags: [android]
 这里游戏首先有一个开始界面，点击开始界面的开始游戏按钮进入游戏界面，游戏界面需要实现**提示玩家轮流下子**，以及**胜利**和**平局**等状态。
 
 ![这里写图片描述](http://img.blog.csdn.net/20161023160701873)
-
 ![这里写图片描述](http://img.blog.csdn.net/20161023160719066)
-
 ![这里写图片描述](http://img.blog.csdn.net/20161023160731972)
 
 ### 2.UI界面布局设计
