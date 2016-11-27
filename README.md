@@ -1,3 +1,14 @@
+### **1.FourInaRowGame(Android) | 安卓四子棋小游戏**
+
+<a href="https://vimeo.com/187532089">![这里写图片描述](http://img.blog.csdn.net/20161014202248518)
+<a/>
+
+> ***Develop the FourInRow Game with Android foundamental API and adopt the game 'Plant and Zoombies' theme and characters.<br/>
+港大读研期间的平时作业，使用安卓的基础API开发四子棋游戏，游戏的界面采用的植物大战僵尸的主题，通过PS设计实现。<br/>***
+
+> ##### ***Development Tool: Android Studio2.1.2, Java***
+
+
 ---
 layout: post
 title:  "JAVA安卓植物大战僵尸主题四子棋游戏"
@@ -34,10 +45,6 @@ tags: [android]
 四子棋的游戏规则和五子棋不同，虽然都是横向纵向或对角线方向上有五个或四个相同的棋子即胜利，但四子棋落子有限制，必须要从棋盘底部往上堆叠，不是可以下在任意位置，就相当于将棋盘竖立起来一样，同时四子棋的棋盘是6x7宫格，横向7个，纵向6个，因此出现平局的现象很正常。
 
 这里游戏首先有一个开始界面，点击开始界面的开始游戏按钮进入游戏界面，游戏界面需要实现**提示玩家轮流下子**，以及**胜利**和**平局**等状态。
-
-![这里写图片描述](http://img.blog.csdn.net/20161023160701873)
-![这里写图片描述](http://img.blog.csdn.net/20161023160719066)
-![这里写图片描述](http://img.blog.csdn.net/20161023160731972)
 
 ### 2.UI界面布局设计
 
